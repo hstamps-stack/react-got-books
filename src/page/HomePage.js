@@ -16,7 +16,7 @@ const getBooks = async () =>{
     }
    
 }
-
+const HomePage = () => {
     return (
         <div className="text-center">
             <h1 className="font-weight-bold mt-3">
@@ -25,6 +25,8 @@ const getBooks = async () =>{
                 <button className="btn btn-dark btn-lg mt-2" 
                     onClick= {getBooks}
                 >
+            <form>
+                <button className="btn btn-dark btn-lg mt-2" >
                     Show
                 </button>
                 <div className="mt-4 input-group">
@@ -33,6 +35,7 @@ const getBooks = async () =>{
                      placeholder="search..."
                     />
                 </div>
+            </form> 
         </div>
     )
 }
