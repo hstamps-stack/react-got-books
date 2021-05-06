@@ -1,9 +1,30 @@
+import instance from '../api/apiConfig';
+import {useState} from 'react';
+
+const HomePage = () => {
+const [books, setBooks] = useState([]);
+
+console.log(books);
+
+const getBooks = async () =>{
+    try{
+        let {data} = await instance.get('/books');
+        setBooks(data);
+    }
+    catch (e){
+        console.log(e)
+    }
+   
+}
 const HomePage = () => {
     return (
         <div className="text-center">
             <h1 className="font-weight-bold mt-3">
                 Game of Thrones Book List!
             </h1>
+                <button className="btn btn-dark btn-lg mt-2" 
+                    onClick= {getBooks}
+                >
             <form>
                 <button className="btn btn-dark btn-lg mt-2" >
                     Show
