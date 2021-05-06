@@ -1,8 +1,8 @@
-
-function App() {
+import HomePage from './page/HomePage'
+const App = () => {
   return (
-    <div className>
-
+    <div className="container">
+      <HomePage />
     </div>
   );
 }
