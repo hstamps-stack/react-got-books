@@ -1,10 +1,27 @@
 import instance from '../api/apiConfig';
-import {useState} from 'react';
+import {useEffect ,useState} from 'react';
 
 const HomePage = () => {
 const [books, setBooks] = useState([]);
+const [searchBook, setSearchBook] = useState('');
 
-console.log(books);
+console.log(books)
+useEffect(() =>{ 
+    if(books.length){
+        const bookFound = books.filter((b) =>{
+            return (        
+             b.name.toLowerCase().includes(searchBook.toLowerCase())
+            )
+        });
+        
+         setBooks(bookFound)
+
+ 
+    }
+        
+},[searchBook])
+
+
 
 const getBooks = async () =>{
     try{
@@ -16,26 +33,39 @@ const getBooks = async () =>{
     }
    
 }
-const HomePage = () => {
+
+const handleChange = (e) =>{
+    setSearchBook(e.target.value)
+}
+
+
     return (
         <div className="text-center">
             <h1 className="font-weight-bold mt-3">
                 Game of Thrones Book List!
             </h1>
-                <button className="btn btn-dark btn-lg mt-2" 
+            <button className="btn btn-dark btn-lg mt-2" 
                     onClick= {getBooks}
                 >
-            <form>
-                <button className="btn btn-dark btn-lg mt-2" >
                     Show
-                </button>
-                <div className="mt-4 input-group">
-                    <input type="text" 
-                     className="form-control" 
-                     placeholder="search..."
-                    />
-                </div>
-            </form> 
+            </button>
+            <form action="">
+                    <div className="mt-4 form-group">
+                        <input type="text" 
+                        className="form-control" 
+                        placeholder="search..."
+                        value={searchBook}
+                        onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        {books.length > 0? (books.map((b,i) =>{
+                            return(
+                                <p key={i}>{b.isbn}</p>
+                            )
+                        })): null}
+                    </div>
+            </form>
         </div>
     )
 }
